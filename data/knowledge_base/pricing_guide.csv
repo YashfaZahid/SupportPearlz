@@ -1,0 +1,16 @@
+sku,product_name,description,list_price_pkr,promo_price_pkr,availability,product_line
+AP300-UNIT,AquaPearl 300,Smart RO water purifier base unit,44900,42900,in_stock,AquaPearl 300
+AP500-UNIT,AquaPearl 500 Pro,Premium RO purifier with UV and app,69900,64900,in_stock,AquaPearl 500 Pro
+AP500-SED,AquaPearl 500 Sediment Pre-Filter,Replacement sediment cartridge,3200,2990,in_stock,AquaPearl 500 Pro
+AP500-CAR,AquaPearl 500 Carbon Block Filter,Replacement carbon cartridge,4500,4200,in_stock,AquaPearl 500 Pro
+AP500-ROM,AquaPearl 500 RO Membrane,Replacement RO membrane,8900,8500,in_stock,AquaPearl 500 Pro
+AP500-REM,AquaPearl 500 Remineralisation Cartridge,Post-filter remineralisation,3900,3900,in_stock,AquaPearl 500 Pro
+AP500-BND,AquaPearl 500 Annual Filter Bundle,Sediment+carbon+membrane pack,14900,13500,in_stock,AquaPearl 500 Pro
+AP300-SED,AquaPearl 300 Sediment Filter,Replacement sediment cartridge,2800,2800,in_stock,AquaPearl 300
+AERO-MINI,AeroPearl Mini,Compact HEPA air purifier,32900,29900,in_stock,AeroPearl Mini
+AERO-HEPA,AeroPearl Mini HEPA Pack,Replacement HEPA/carbon pack,5500,5200,in_stock,AeroPearl Mini
+AP200-UNIT,AquaPearl 200,Discontinued RO unit,0,0,discontinued,AquaPearl 200
+AERO-CL,AeroPearl Classic,Discontinued air purifier,0,0,discontinued,AeroPearl Classic
+SVC-INSTALL,Professional Installation Visit,Wall-mount or under-sink install by Pearlz tech,4500,4500,in_stock,Service
+SVC-AMC-BASIC,AMC Basic,Annual maintenance contract basic tier,8990,8990,in_stock,Service
+SVC-AMC-PLUS,AMC Plus,Annual maintenance contract plus tier,14990,14990,in_stock,Service

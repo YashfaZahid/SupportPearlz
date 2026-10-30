@@ -1,0 +1,28 @@
+# Pinned after successful Phase 0 install on Python 3.12.10 (Windows).
+# LangChain 0.3.x set — do not mix with langchain 1.x packages.
+
+python-dotenv==1.2.4
+pydantic==2.14.2
+pydantic-settings==2.16.2
+
+langchain==0.3.25
+langchain-core==0.3.63
+langchain-community==0.3.24
+langchain-openai==0.3.18
+langchain-chroma==0.2.4
+langchain-text-splitters==0.3.8
+openai==1.109.1
+chromadb==1.5.9
+
+pypdf==5.9.0
+python-docx==1.2.0
+
+typer==0.27.3
+rich==14.3.4
+streamlit==1.66.1
+
+pytest==8.4.2
+pytest-cov==6.3.0
+
+# Dev-only helper used once to author PDF knowledge-base files (Phase 1)
+reportlab==4.4.0
