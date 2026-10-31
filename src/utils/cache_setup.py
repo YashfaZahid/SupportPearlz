@@ -29,7 +29,7 @@ def setup_langchain_cache(settings: Settings | None = None) -> bool:
 
     try:
         from langchain_community.cache import SQLiteCache
-        from langchain.globals import set_llm_cache
+        from langchain_core.globals import set_llm_cache
 
         set_llm_cache(SQLiteCache(database_path=str(path)))
         logger.info("LangChain SQLite cache enabled at %s", path)

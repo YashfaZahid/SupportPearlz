@@ -6,10 +6,11 @@ import logging
 from typing import Any
 
 from langchain_community.retrievers import BM25Retriever
+from langchain_core.callbacks import CallbackManagerForRetrieverRun
 from langchain_core.documents import Document
 from langchain_core.retrievers import BaseRetriever
-from langchain.retrievers import EnsembleRetriever
 from langchain_chroma import Chroma
+from pydantic import ConfigDict, Field
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +22,44 @@ def _to_chroma_where(filter_dict: dict[str, Any] | None) -> dict[str, Any] | Non
     if len(filter_dict) == 1:
         return dict(filter_dict)
     return {"$and": [{key: value} for key, value in filter_dict.items()]}
+
+
+class WeightedEnsembleRetriever(BaseRetriever):
+    """Minimal RRF ensemble — avoids ``langchain.retrievers`` (breaks on Python 3.14)."""
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    retrievers: list[BaseRetriever] = Field(default_factory=list)
+    weights: list[float] = Field(default_factory=list)
+    c: int = 60
+    id_key: str = "page_content"
+
+    def _get_relevant_documents(
+        self,
+        query: str,
+        *,
+        run_manager: CallbackManagerForRetrieverRun,
+    ) -> list[Document]:
+        if not self.retrievers:
+            return []
+        weights = self.weights or [1.0] * len(self.retrievers)
+        if len(weights) != len(self.retrievers):
+            raise ValueError("weights must match retrievers length")
+
+        fused: dict[str, float] = {}
+        doc_map: dict[str, Document] = {}
+        for retriever, weight in zip(self.retrievers, weights):
+            docs = retriever.invoke(
+                query,
+                config={"callbacks": run_manager.get_child()},
+            )
+            for rank, doc in enumerate(docs, start=1):
+                key = str(doc.metadata.get(self.id_key) or doc.page_content)
+                doc_map[key] = doc
+                fused[key] = fused.get(key, 0.0) + weight / (self.c + rank)
+
+        ordered = sorted(fused.items(), key=lambda item: item[1], reverse=True)
+        return [doc_map[key] for key, _ in ordered]
 
 
 def documents_from_chroma(vector_store: Chroma) -> list[Document]:
@@ -72,7 +111,7 @@ def build_hybrid_retriever(
         dense_weight,
         k,
     )
-    return EnsembleRetriever(
+    return WeightedEnsembleRetriever(
         retrievers=[bm25, dense],
         weights=[bm25_weight, dense_weight],
     )
