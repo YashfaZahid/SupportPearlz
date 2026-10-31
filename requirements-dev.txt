@@ -1,0 +1,8 @@
+# Local / CI extras (not required for Streamlit Cloud runtime)
+-r requirements.txt
+
+pytest==8.4.2
+pytest-cov==6.3.0
+
+# One-shot helper used to author PDF knowledge-base files (Phase 1)
+reportlab==4.4.0

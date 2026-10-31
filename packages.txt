@@ -1,0 +1,2 @@
+# Apt packages for Streamlit Community Cloud (fallback if a wheel must build from source)
+libffi-dev
