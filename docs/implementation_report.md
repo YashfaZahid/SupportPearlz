@@ -19,7 +19,8 @@ Update after **each** phase. Do not claim tests passed without running them.
 | 7 | Memory + CLI | **Completed** |
 | 8 | Evaluation harness | **Completed** (auto-score; manual review still for report) |
 | 9 | Streamlit UI (streaming, cache, disclaimer) | **Completed** |
-| 10 | Deliverables packaging | Pending |
+| 9b | Bonus pack + vinyl/koi UI palette | **Completed** |
+| 10 | Deliverables packaging | Pending (diagram/PDF/video) |
 
 ---
 
@@ -308,3 +309,28 @@ streamlit run src/app_streamlit.py
 - architecture.png, technical_report.pdf, demo video, screenshot set
 - Prompt weak-vs-strong experiment write-up
 - Optional polish on M03 / citation auto-score
+
+---
+
+## Bonus pack + UI restyle (completed)
+
+### Gap audit
+
+See `docs/feature_gap_audit.md` — all Must/Should/Could covered; C1–C10 addressed (C8 as local JSONL traces; C2 as fusion reranker without heavy cross-encoder download).
+
+### Added modules
+
+- `src/retrieval/hybrid.py` — BM25 + dense EnsembleRetriever
+- `src/retrieval/rerank.py` — retrieve-many → top-4 fusion rerank
+- `src/chains/expansion.py` — multi-query fuse
+- `src/chains/tools.py` — mocked `get_order_status` / `check_stock`
+- `src/utils/tracing.py` — `logs/traces.jsonl`
+- `Dockerfile` + `docker-compose.yml`
+- UI palette `#146466` / `#c92f1c` / `#5aaba9` / `#e2e2c4` + brand art
+
+### Tests
+
+| Command | Result |
+|---------|--------|
+| `pytest tests/test_tools_and_access.py …` (20 tests batch) | **20 passed** |
+| Live smoke: order 88213 tool + warranty ask | **OK** |

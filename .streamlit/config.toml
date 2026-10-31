@@ -1,23 +1,34 @@
 [theme]
-base = "light"
-primaryColor = "#0D9488"
-backgroundColor = "#F7F4EF"
-secondaryBackgroundColor = "#E8EEF2"
-textColor = "#0B1F33"
-font = "sans serif"
-baseRadius = "0.5rem"
-buttonRadius = "0.5rem"
-borderColor = "#C5D0DA"
+base = "dark"
+primaryColor = "#C026D3"
+backgroundColor = "#0A0A0B"
+secondaryBackgroundColor = "#141416"
+textColor = "#F4F4F5"
+font = "Poppins:https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+headingFont = "Poppins:https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap"
+baseRadius = "1rem"
+buttonRadius = "0.85rem"
+borderColor = "#2A2A2E"
 showWidgetBorder = true
-linkColor = "#0D9488"
-headingFontSizes = ["2rem", "1.5rem", "1.25rem", "1.1rem", "1rem", "0.95rem"]
+showSidebarBorder = false
+linkColor = "#E879F9"
+headingFontSizes = ["1.75rem", "1.35rem", "1.15rem", "1.05rem", "1rem", "0.95rem"]
+codeBackgroundColor = "#1A1A1E"
+redColor = "#F472B6"
+paddingTop = "1.25rem"
+paddingBottom = "1.25rem"
 
 [theme.sidebar]
-backgroundColor = "#0B1F33"
-secondaryBackgroundColor = "#132A40"
-textColor = "#F7F4EF"
-primaryColor = "#0D9488"
-borderColor = "#1E3A52"
+backgroundColor = "#121214"
+secondaryBackgroundColor = "#1A1A1E"
+textColor = "#E4E4E7"
+primaryColor = "#C026D3"
+borderColor = "#2A2A2E"
+linkColor = "#E879F9"
+paddingTop = "1.5rem"
+
+[server]
+enableStaticServing = true
 
 [client]
 toolbarMode = "minimal"

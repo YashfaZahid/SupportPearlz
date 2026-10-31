@@ -11,7 +11,8 @@
 |--------|-----|
 | Elevate **token streaming** in Streamlit (citations finalize after structured object) | Explicit product requirement for portfolio UX; assignment Feature 18 / C4 |
 | Add **two caching strategies**: (1) LangChain LLM/embedding response cache on disk/memory for repeated eval & chat turns; (2) Streamlit `@st.cache_resource` for loaded vector store + chain singletons | Explicit requirement; cuts cost/latency without changing RAG semantics |
-| UI palette locked to **navy / teal / warm-white** healthcare SaaS look + prominent **medical/product-safety disclaimer** | Explicit UX requirement; disclaimer reinforces grounding (no invented health/cert claims) |
+| UI palette locked to vinyl/koi brand: **`#146466` / `#c92f1c` / `#5aaba9` / `#e2e2c4`** + medical/product-safety disclaimer | Brand asset + trust UX |
+| Bonus pack wired: hybrid, rerank, expansion, role KB, tools, traces, Docker | Assignment Section 11 |
 | Target runtime noted as **Python 3.12** on this machine (still within 3.10–3.12 band) | Local environment discovery |
 | `SCORE_THRESHOLD` interpreted as **max Chroma cosine distance** (default **0.75**), not similarity | Live Phase 4/5 scores: good hits ~0.35–0.55 distance |
 

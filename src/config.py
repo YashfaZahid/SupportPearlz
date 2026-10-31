@@ -60,11 +60,22 @@ class Settings(BaseSettings):
 
     # Retrieval
     retrieval_k: int = Field(default=4, gt=0)
-    retrieval_strategy: Literal["similarity", "mmr"] = "mmr"
+    retrieval_strategy: Literal["similarity", "mmr", "hybrid"] = "hybrid"
     # Interpreted as max acceptable Chroma cosine *distance* (lower distance = better).
     score_threshold: float = Field(default=0.75, ge=0.0, le=2.0)
     mmr_fetch_k: int = Field(default=12, gt=0)
     mmr_lambda: float = Field(default=0.5, ge=0.0, le=1.0)
+    # C1 / C2 / C5 bonuses
+    enable_hybrid_search: bool = True
+    enable_rerank: bool = True
+    rerank_candidates: int = Field(default=20, gt=0)
+    enable_query_expansion: bool = True
+    # C6 role: customer sees public only; agent sees public+internal
+    default_access_role: Literal["customer", "agent"] = "customer"
+    # C7 tools
+    enable_tools: bool = True
+    # C9 query-result cache
+    enable_query_cache: bool = True
 
     # Context & history
     history_max_turns: int = Field(default=6, gt=0)

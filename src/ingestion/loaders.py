@@ -99,6 +99,14 @@ def content_fingerprint(text: str) -> str:
     return hashlib.sha256(normalised).hexdigest()
 
 
+def infer_access_level(filename: str) -> str:
+    """C6: internal handbook vs public customer docs."""
+    lower = filename.lower()
+    if "handbook" in lower or "internal" in lower:
+        return "internal"
+    return "public"
+
+
 def _base_metadata(
     path: Path,
     *,
@@ -116,6 +124,7 @@ def _base_metadata(
         "version": version,
         "last_updated": version,
         "location": location,
+        "access_level": infer_access_level(path.name),
     }
     if extra:
         meta.update(extra)

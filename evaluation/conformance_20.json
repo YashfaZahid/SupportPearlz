@@ -1,0 +1,22 @@
+[
+  {"id": "T-01", "maps_to": "E01", "intent": "Warranty period AquaPearl 500 Pro"},
+  {"id": "T-02", "maps_to": "E02", "intent": "Box contents"},
+  {"id": "T-03", "maps_to": "E03", "intent": "Sediment filter price"},
+  {"id": "T-04", "maps_to": "E04", "intent": "Cleaning procedure"},
+  {"id": "T-05", "maps_to": "E05", "intent": "Three beeps semantic"},
+  {"id": "T-06", "maps_to": "M01", "intent": "Weird taste after filter change"},
+  {"id": "T-07", "maps_to": "M02", "intent": "Leak + claim multi-doc"},
+  {"id": "T-08", "maps_to": "M03", "intent": "Unauthorised repair conflict"},
+  {"id": "T-09", "maps_to": "F01+F02", "intent": "Return follow-up"},
+  {"id": "T-10", "intent": "Delivery Karachi then Skardu", "note": "Extend eval with shipping follow-up"},
+  {"id": "T-11", "intent": "Topic switch to privacy", "note": "Manual demo"},
+  {"id": "T-12", "maps_to": "U01", "intent": "Student discount refusal"},
+  {"id": "T-13", "maps_to": "U02", "intent": "NSF certification refusal"},
+  {"id": "T-14", "maps_to": "U03", "intent": "Weather out of scope"},
+  {"id": "T-15", "maps_to": "A01", "intent": "Ambiguous filter price"},
+  {"id": "T-16", "maps_to": "A02", "intent": "Ambiguous return"},
+  {"id": "T-17", "maps_to": "V01", "intent": "Injection refuse"},
+  {"id": "T-18", "maps_to": "V02", "intent": "False 5-year warranty"},
+  {"id": "T-19", "maps_to": "V03", "intent": "Guess refund refuse"},
+  {"id": "T-20", "intent": "Consistency across paraphrases", "note": "Manual robustness"}
+]

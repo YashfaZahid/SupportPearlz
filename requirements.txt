@@ -24,5 +24,8 @@ streamlit==1.66.1
 pytest==8.4.2
 pytest-cov==6.3.0
 
+# Hybrid lexical retrieval (C1)
+rank_bm25==0.2.2
+
 # Dev-only helper used once to author PDF knowledge-base files (Phase 1)
 reportlab==4.4.0

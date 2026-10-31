@@ -1,0 +1,15 @@
+services:
+  supportpearlz:
+    build: .
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      # Persist vector store across restarts (preferred over baking into image)
+      - ./data/vector_store:/data/vector_store
+      - ./data/cache:/data/cache
+      - ./data/knowledge_base:/app/data/knowledge_base:ro
+    environment:
+      VECTOR_STORE_PATH: /data/vector_store
+      LANGCHAIN_CACHE_PATH: /data/cache/langchain.db
