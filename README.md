@@ -1,77 +1,54 @@
 # SupportPearlz
 
-Retrieval-augmented customer support knowledge agent for **Pearlz Home Systems** (AquaPearl / AeroPearl), built with Python and LangChain.
+SupportPearlz is a retrieval-augmented support agent for a fictional home-systems brand (Pearlz / AquaPearl / AeroPearl). It answers only from the product knowledge base, cites the passage it used, and refuses questions the documents do not cover.
 
-> **Safety:** SupportPearlz answers only from Pearlz documentation. It is **not** a medical device advisor and must not be used for clinical decisions. Do not invent health claims or certifications.
+## What it does
 
-## Prerequisites
+- Loads markdown, CSV, PDF, and DOCX from `data/knowledge_base/`
+- Chunks documents with metadata preserved for later filtering
+- Embeds chunks into Chroma
+- Retrieves with dense search, MMR, or a hybrid of BM25 and vectors
+- Reranks a wider candidate set down to the passages that go to the model
+- Streams an answer with citations in a Streamlit UI and a CLI
+- Scores a fixed question set through `evaluation/run_eval.py`
 
-- Python **3.10–3.12** (developed on 3.12)
-- An OpenAI API key (or OpenAI-compatible provider key)
+The knowledge base is fictional product documentation: warranty, shipping, pricing, troubleshooting, firmware notes, and a service agreement. Do not treat it as a real company's policy.
 
-## Setup
+## Run
+
+Python 3.10–3.12.
 
 ```bash
 python -m venv .venv
-
-# Windows
-.venv\Scripts\activate
-
-# macOS / Linux
-source .venv/bin/activate
-
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-# Optional local/CI extras:
-# pip install -r requirements-dev.txt
-copy .env.example .env   # Windows
-# cp .env.example .env   # macOS / Linux
-```
-
-Edit `.env` and set `OPENAI_API_KEY`. Never commit `.env`.
-
-### Streamlit Community Cloud
-
-Deploy from `main` with entrypoint `app.py`. In **Advanced settings**, prefer **Python 3.12** if available (this repo also installs cleanly on Cloud’s Python 3.14 via pinned `zstandard==0.25.0`). Put secrets in the Cloud Secrets field (same keys as `.env`).
-
-### Config smoke check
-
-```bash
-python -m src.config
-```
-
-Prints loaded settings with secrets masked. Missing `OPENAI_API_KEY` exits with a clear error.
-
-### Tests (Phase 0)
-
-```bash
-pytest tests/test_config.py
-```
-
-## Project status
-
-| Area | Status |
-|------|--------|
-| Config, logging, skeleton | Done (Phase 0) |
-| Knowledge base (12 docs) | Done (Phase 1) |
-| Ingestion loaders + chunking | Done (Phases 2–3) |
-| Vector store / RAG / CLI | Done (Phases 4–7) |
-| Evaluation harness | Done (Phase 8) — see `evaluation/results/latest.md` |
-| Streamlit UI | Done (Phase 9) |
-
-```bash
-pytest
-python -m src.ingestion.build_index --rebuild   # first time / after KB changes
-python -m src.app_cli chat
+cp .env.example .env        # set OPENAI_API_KEY
+python -m src.ingestion.build_index --rebuild
 streamlit run app.py
+```
+
+CLI and checks:
+
+```bash
+python -m src.app_cli chat
+python -m src.config        # prints settings with secrets masked
+pytest
 python -m evaluation.run_eval
 ```
 
-See `docs/architecture.md` and `docs/implementation_report.md` for the living plan and progress.
+## Layout
 
-## Environment variables
+```text
+src/ingestion/     Loaders, chunking, index build
+src/retrieval/     Dense, hybrid BM25, rerank, relevance gate
+src/chains/        Prompts, citations, memory, RAG chain
+src/app_streamlit.py
+evaluation/        Question set and latest results
+docs/architecture.md
+```
 
-See `.env.example` for the full table (models, chunking, retrieval `k`, thresholds, LangChain cache path, streaming flag, medical disclaimer, logging).
+Docker Compose is included for a container run. On Streamlit Community Cloud, use `app.py` as the entrypoint and put the same keys in Secrets. Prefer Python 3.12 there.
 
-## Licence / academic note
+## Limits
 
-Course assignment AAI–407 / PRAC–03. Knowledge-base content is fictional.
+If the documents do not contain the answer, the agent should say so. It is not a medical advisor and must not invent certifications or health claims.
